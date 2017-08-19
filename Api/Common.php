@@ -45,9 +45,9 @@ class Common{
 			'version'=>$this->version,
 			'notify_url'=>$this->notify_url
 		);
-		foreach ($params as $item) {
-			if($item=="" || $item==NULL){
-				unset($item);
+		foreach ($params as $key => $value) {
+			if($value=='' || $value==NULL){
+				unset($params[$key]);
 			}
 		}
 		return $params;
