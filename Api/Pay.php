@@ -75,12 +75,15 @@ class Pay extends Common{
 			'product_code'=>$this->product_code,
 			'goods_type'=>$this->goods_type,
 			'passback_params'=>$this->passback_params,
-			'extend_params'=>$this->extend_params(),
 			'enable_pay_channels'=>$this->enable_pay_channels,
 			'disable_pay_channels'=>$this->disable_pay_channels,
 			'store_id'=>$this->store_id,
 			'quit_url'=>$this->quit_url
 		);
+		$extend_params = $this->extend_params();
+		if(count($extend_params)>0){
+                       $params['extend_params']=$extend_params;
+		}
 		//排除空白选项
 		foreach ($params as $key => $value) {
 			if($value=='' || $value==NULL){
@@ -105,7 +108,7 @@ class Pay extends Common{
 				unset($params[$key]);
 			}
 		}
-		return json_encode($params);
+		return $params;
 	}
 	/**
      * 建立请求，以表单HTML形式构造（默认）
